@@ -9,7 +9,9 @@ const basename = path.basename(__filename)
 
 const databaseUrl = process.env.DATABASE_URL
 const db = {}
-const sequelize = new Sequelize(databaseUrl)
+const sequelize = new Sequelize(databaseUrl, {
+    dialect: 'mysql'
+})
 
 fs
     .readdirSync(__dirname)
