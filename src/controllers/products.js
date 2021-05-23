@@ -1,44 +1,43 @@
 'use strict'
 
-const Sale = require('../models').sale
+const Products = require('../models').products
 
-
-class SaleController {
+class ProductsController {
     findAll(req, res, next) {
-        Sale.findAll()
-            .then(sales => {
-                res.json(sales)
+        Products.findAll()
+            .then(products => {
+                res.json(products)
             })
             .catch(err => next(err))
     }
 
     findOne(req, res, next) {
-        Sale.findOne({ where: { id: req.params.id } })
-            .then(sale => {
-                res.json(sale)
+        Products.findOne({ where: { id: req.params.id } })
+            .then(product => {
+                res.json(product)
             })
             .catch(err => next(err))
     }
 
     create(req, res, next) {
         const body = req.body
-        Sale.create(body)
+        Products.create(body)
             .then(() => res.status(201).end())
             .catch(err => next(err))
     }
 
     update(req, res, next) {
         const body = req.body
-        Sale.update(body, { where: { id: req.params.id } })
+        Products.update(body, { where: { id: req.params.id } })
             .then(() => res.status(200).end())
             .catch(err => next(err))
     }
 
     delete(req, res, next) {
-        Sale.destroy({ where: { id: req.params.id } })
+        Products.destroy({ where: { id: req.params.id } })
             .then(() => res.status(204).end())
             .catch(err => next(err))
     }
 }
 
-module.exports = SaleController
+module.exports = ProductsController

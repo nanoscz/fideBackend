@@ -37,7 +37,6 @@ class UserController {
     }
 
     update(req, res, next) {
-        console.log('req', req.body)
         const body = req.body
         User.update(body, { where: { id: req.params.id } })
             .then(() => res.status(200).end())
@@ -45,7 +44,6 @@ class UserController {
     }
 
     delete(req, res, next) {
-        console.log('id', req.params.id)
         User.destroy({ where: { id: req.params.id } })
             .then(() => res.status(204).end())
             .catch(err => next(err))
