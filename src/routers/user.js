@@ -7,16 +7,16 @@ const router = express.Router()
 const userController = new UserController()
 
 router
-    .route('/')
-    .get(userController.findAll)
-    .post(userController.create)
+  .route('/')
+  .get(userController.findAll)
+  .post(userController.create)
 
 router
-    .route('/:id')
-    .get(userController.findOne)
-    .patch(userController.update)
-    .delete(userController.delete)
+  .route('/:id')
+  .get(userController.findOne)
+  .patch(userController.update)
+  .delete(userController.delete)
 
 module.exports = {
-    userChildRouter: router
+  userChildRouter: router
 }

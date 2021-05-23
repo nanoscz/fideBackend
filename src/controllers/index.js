@@ -6,8 +6,8 @@ const ProductsController = require('./products')
 const ClientController = require('./client')
 
 module.exports = {
-    UserController,
-    SaleController,
-    ProductsController,
-    ClientController
+  UserController,
+  SaleController,
+  ProductsController,
+  ClientController
 }
