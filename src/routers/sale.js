@@ -17,6 +17,10 @@ router
   .patch(saleController.update)
   .delete(saleController.delete)
 
+router
+  .route('/date')
+  .post(saleController.findForDate)
+
 module.exports = {
   saleChildRouter: router
 }
