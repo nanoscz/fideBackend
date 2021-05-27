@@ -30,8 +30,10 @@ class SaleController {
         [Op.between]: [startDate, endDate]
       }
     };
-
-    Sale.findAll({ where })
+    const order = [
+      ['createAt', 'DESC']
+    ]
+    Sale.findAll({ where, order })
       .then(sale => {
         res.json(sale)
       })
