@@ -22,13 +22,16 @@ class SaleController {
   }
 
   findForDate(req, res, next) {
-    const startDate = new Date(req.body.date);
+    const { date, idSeller } = req.body;
+    const startDate = new Date(date);
     const endDate = new Date(startDate)
     endDate.setDate(endDate.getDate() + 1);
+
     const where = {
       createAt: {
         [Op.between]: [startDate, endDate]
-      }
+      },
+      idSeller: idSeller
     };
     const order = [
       ['createAt', 'DESC']
