@@ -21,6 +21,10 @@ router
   .route('/date')
   .post(saleController.findForDate)
 
+router
+  .route('/report/date')
+  .post(saleController.findByDate)
+
 module.exports = {
   saleChildRouter: router
 }

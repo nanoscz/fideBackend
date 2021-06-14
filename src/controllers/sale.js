@@ -43,6 +43,27 @@ class SaleController {
       .catch(err => next(err))
   }
 
+  findByDate(req, res, next) {
+    const { date } = req.body;
+    const startDate = new Date(date);
+    const endDate = new Date(startDate)
+    endDate.setDate(endDate.getDate() + 1);
+
+    const where = {
+      createAt: {
+        [Op.between]: [startDate, endDate]
+      }
+    };
+    const order = [
+      ['createAt', 'DESC']
+    ]
+    Sale.findAll({ where, order })
+      .then(sale => {
+        res.json(sale)
+      })
+      .catch(err => next(err))
+  }
+
   create(req, res, next) {
     const body = req.body
     Sale.create(body)
