@@ -5,8 +5,12 @@ const { Op } = require("sequelize");
 
 class SaleController {
   findAll(req, res, next) {
-    console.log(req.params)
-    Sale.findAll()
+    const where = {};
+    const order = [
+      ['createAt', 'DESC']
+    ]
+
+    Sale.findAll({ ehere, order })
       .then(sales => {
         res.json(sales)
       })
