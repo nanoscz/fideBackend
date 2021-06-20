@@ -9,7 +9,6 @@ const userController = new UserController()
 router
   .route('/')
   .get(userController.findAll)
-  .post(userController.create)
 
 router
   .route('/:id')

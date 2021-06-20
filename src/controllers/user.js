@@ -23,16 +23,6 @@ class UserController {
       .catch(err => next(err))
   }
 
-  create(req, res, next) {
-    const body = req.body
-    const salt = bcrypt.genSaltSync(saltRounds)
-    const password = bcrypt.hashSync(body.password, salt)
-    body.password = password
-    User.create(body)
-      .then(() => res.status(201).end())
-      .catch(err => next(err))
-  }
-
   update(req, res, next) {
     const body = req.body
     User.update(body, { where: { id: req.params.id } })
