@@ -4,10 +4,10 @@ const Sale = require('../models').sale
 const { Op } = require('sequelize')
 
 class SaleController {
-  findAll (req, res, next) {
+  findAll(req, res, next) {
     const where = {}
     const order = [
-      ['createAt', 'DESC']
+      ['id', 'DESC']
     ]
 
     Sale.findAll({ where, order })
@@ -17,7 +17,7 @@ class SaleController {
       .catch(err => next(err))
   }
 
-  findOne (req, res, next) {
+  findOne(req, res, next) {
     Sale.findOne({ where: { id: req.params.id } })
       .then(sale => {
         if (!sale) {
@@ -33,7 +33,7 @@ class SaleController {
       .catch(err => next(err))
   }
 
-  findForDate (req, res, next) {
+  findForDate(req, res, next) {
     const { date, idSeller } = req.body
     const startDate = new Date(date)
     const endDate = new Date(startDate)
@@ -46,7 +46,7 @@ class SaleController {
       idSeller: idSeller
     }
     const order = [
-      ['createAt', 'DESC']
+      ['id', 'DESC']
     ]
     Sale.findAll({ where, order })
       .then(sale => {
@@ -55,7 +55,7 @@ class SaleController {
       .catch(err => next(err))
   }
 
-  findByDate (req, res, next) {
+  findByDate(req, res, next) {
     const { date } = req.body
     const startDate = new Date(date)
     const endDate = new Date(startDate)
@@ -67,7 +67,7 @@ class SaleController {
       }
     }
     const order = [
-      ['createAt', 'DESC']
+      ['id', 'DESC']
     ]
     Sale.findAll({ where, order })
       .then(sale => {
@@ -76,7 +76,7 @@ class SaleController {
       .catch(err => next(err))
   }
 
-  create (req, res, next) {
+  create(req, res, next) {
     const body = req.body
     Sale.create(body)
       .then((sale) => {
@@ -85,7 +85,7 @@ class SaleController {
       .catch(err => next(err))
   }
 
-  update (req, res, next) {
+  update(req, res, next) {
     const body = req.body
     Sale.update(body, { where: { id: req.params.id } })
       .then((data) => {
@@ -102,7 +102,7 @@ class SaleController {
       .catch(err => next(err))
   }
 
-  delete (req, res, next) {
+  delete(req, res, next) {
     Sale.destroy({ where: { id: req.params.id } })
       .then(() => res.status(204).end())
       .catch(err => next(err))
