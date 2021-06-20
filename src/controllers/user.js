@@ -4,7 +4,11 @@ const User = require('../models').user
 
 class UserController {
   findAll(req, res, next) {
-    User.findAll()
+    const where = {};
+    const order = [
+      ['createAt', 'DESC']
+    ]
+    User.findAll({ where, order })
       .then(users => {
         for (const user of users) {
           delete user.dataValues.password
