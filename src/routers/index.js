@@ -12,7 +12,7 @@ const router = express.Router()
 
 router.use('/user', userChildRouter)
 router.use('/sale', saleChildRouter)
-router.use('/products', productsChildRouter)
+router.use('/product', productsChildRouter)
 router.use('/client', clientChildRouter)
 router.use('/category', categoryChildRouter)
 router.use('/security', securityChildRouter)
