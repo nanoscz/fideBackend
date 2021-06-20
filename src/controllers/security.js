@@ -4,7 +4,7 @@ const User = require('../models').user
 const saltRounds = 10
 
 class SecurityController {
-  login (req, res, next) {
+  login(req, res, next) {
     const error = {
       name: 'Authentication Error.',
       message: 'The username or password is incorrect.'
@@ -30,7 +30,7 @@ class SecurityController {
       .catch(err => next(err))
   }
 
-  register (req, res, next) {
+  register(req, res, next) {
     const body = req.body
     const salt = bcrypt.genSaltSync(saltRounds)
     const password = bcrypt.hashSync(body.password, salt)
@@ -46,7 +46,10 @@ class SecurityController {
     }
 
     User.create(user)
-      .then(() => res.status(201).end())
+      .then((user) => {
+        delete user.dataValues.password
+        res.status(201).json(user.dataValues).end()
+      })
       .catch(err => next(err))
   }
 }

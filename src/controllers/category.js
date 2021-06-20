@@ -3,7 +3,7 @@
 const Category = require('../models').category
 
 class CategoryController {
-  findAll (req, res, next) {
+  findAll(req, res, next) {
     const where = {}
     const order = [
       ['createAt', 'DESC']
@@ -15,29 +15,39 @@ class CategoryController {
       .catch(err => next(err))
   }
 
-  findOne (req, res, next) {
+  findOne(req, res, next) {
     Category.findOne({ where: { id: req.params.id } })
       .then(category => {
+        if (!category) {
+          res.status(404).json({
+            error: {
+              name: 'notFound',
+              message: 'category not found.'
+            }
+          })
+        }
         res.json(category)
       })
       .catch(err => next(err))
   }
 
-  create (req, res, next) {
+  create(req, res, next) {
     const body = req.body
     Category.create(body)
-      .then(() => res.status(201).end())
+      .then((category) => {
+        res.status(201).json(category.dataValues).end()
+      })
       .catch(err => next(err))
   }
 
-  update (req, res, next) {
+  update(req, res, next) {
     const body = req.body
     Category.update(body, { where: { id: req.params.id } })
       .then(() => res.status(200).end())
       .catch(err => next(err))
   }
 
-  delete (req, res, next) {
+  delete(req, res, next) {
     Category.destroy({ where: { id: req.params.id } })
       .then(() => res.status(204).end())
       .catch(err => next(err))
