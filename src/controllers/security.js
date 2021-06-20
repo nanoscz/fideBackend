@@ -39,7 +39,7 @@ class SecurityController {
       username: body.username,
       profile: body.profile,
       photo: body.photo,
-      state: 1,
+      state: body.state,
       password,
       lastLogin: new Date(),
       createAt: new Date()
