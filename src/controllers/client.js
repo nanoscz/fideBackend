@@ -1,10 +1,19 @@
 'use strict'
 
 const Client = require('../models').client
+const { Op } = require("sequelize")
 
 class ClientController {
   findAll(req, res, next) {
     const where = {}
+    const criteria = req.query?.criteria;
+
+    if (criteria) {
+      where.name = {
+        [Op.like]: `%${criteria}%`
+      }
+    }
+
     const order = [
       ['id', 'DESC']
     ]

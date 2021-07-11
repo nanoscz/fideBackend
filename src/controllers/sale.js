@@ -78,9 +78,19 @@ class SaleController {
 
   create(req, res, next) {
     const body = req.body
-    Sale.create(body)
-      .then((sale) => {
-        res.status(201).json(sale.dataValues).end()
+    const where = {}
+    const order = [
+      ['id', 'DESC']
+    ]
+
+    Sale.findOne({ where, order })
+      .then(lastSale => {
+        body.code = lastSale.dataValues.code + 1;
+        Sale.create(body)
+          .then((sale) => {
+            res.status(201).json(sale.dataValues).end()
+          })
+          .catch(err => next(err))
       })
       .catch(err => next(err))
   }

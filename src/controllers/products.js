@@ -1,13 +1,23 @@
 'use strict'
 
 const Products = require('../models').products
+const { Op } = require("sequelize")
 
 class ProductsController {
   findAll(req, res, next) {
-    const where = {}
+    const criteria = req.query?.criteria;
+
     const order = [
       ['id', 'DESC']
     ]
+    const where = {}
+    if (criteria) {
+      where.description = {
+        [Op.like]: `%${criteria}%`
+      }
+    }
+
+
     Products.findAll({ where, order })
       .then(products => {
         res.json(products)
