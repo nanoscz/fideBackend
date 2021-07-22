@@ -12,9 +12,18 @@ class ProductsController {
     ]
     const where = {}
     if (criteria) {
-      where.description = {
-        [Op.like]: `%${criteria}%`
-      }
+      where[Op.or] = [
+        {
+          description: {
+            [Op.like]: `%${criteria}%`
+          }
+        },
+        {
+          code: {
+            [Op.like]: `%${criteria}%`
+          }
+        }
+      ]
     }
 
 
