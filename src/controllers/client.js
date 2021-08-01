@@ -6,7 +6,8 @@ const { Op } = require("sequelize")
 class ClientController {
   findAll(req, res, next) {
     const where = {}
-    const criteria = req.query?.criteria;
+
+    const criteria = req.query.criteria;
 
     if (criteria) {
       where.name = {

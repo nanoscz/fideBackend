@@ -5,7 +5,7 @@ const { Op } = require("sequelize")
 
 class ProductsController {
   findAll(req, res, next) {
-    const criteria = req.query?.criteria;
+    const criteria = req.query.criteria;
 
     const order = [
       ['id', 'DESC']
