@@ -3,6 +3,9 @@
 const Sale = require('../models').sale
 const { Op } = require('sequelize')
 
+/**
+ * @status 0=enable, 1=disable, 2=all
+ */
 class SaleController {
   findAll (req, res, next) {
     const status = req.query.status

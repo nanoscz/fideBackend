@@ -4,7 +4,7 @@ const Products = require('../models').products
 const { Op } = require('sequelize')
 
 /**
- * @status 0=disable, 1=enable, 2=all
+ * @status 0=enable, 1=disable, 2=all
  */
 class ProductsController {
   findAll (req, res, next) {
