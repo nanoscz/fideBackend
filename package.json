@@ -8,7 +8,8 @@
     "dev-win": "set=DEBUG=FIDE-API:* & set=NODE_ENV=development & nodemon ./server.js",
     "start": "node ./server.js",
     "lint": "standard",
-    "migrate": "sequelize db:migrate"
+    "migrate": "sequelize db:migrate --url=$DATABASE_URL",
+    "build-deb": "./node_modules/.bin/node-deb -- config src .env"
   },
   "author": "Fernando Castillo Torrico <fernandocto.scz@gmail.com>",
   "license": "MIT",
@@ -23,11 +24,18 @@
     "morgan": "^1.9.1",
     "mysql2": "^1.7.0",
     "nconf": "^0.10.0",
+    "node-deb": "^0.10.7",
     "sequelize": "^5.19.4"
   },
   "devDependencies": {
     "nodemon": "^1.19.3",
     "sequelize-cli": "^5.5.1",
     "standard": "^14.3.1"
+  },
+  "node_deb": {
+    "package_name": "fide-api",
+    "entrypoints": {
+      "daemon": "node server.js"
+    }
   }
 }
