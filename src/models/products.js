@@ -45,17 +45,22 @@ module.exports = (sequelize, DataTypes) => {
     createAt: {
       type: DataTypes.DATE,
       field: 'fecha'
+    },
+    status: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      allowNull: false
     }
   },
-  {
-    defaultScope: {
-      attributes: {
-        exclude: []
-      }
-    },
-    tableName: 'productos',
-    timestamps: false
-  }
+    {
+      defaultScope: {
+        attributes: {
+          exclude: []
+        }
+      },
+      tableName: 'productos',
+      timestamps: false
+    }
   )
   products.associate = function (models) { }
   return products

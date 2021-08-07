@@ -5,7 +5,14 @@ const { Op } = require('sequelize')
 
 class SaleController {
   findAll(req, res, next) {
-    const where = {}
+
+    const status = req.query.status;
+    const where = {
+      status: {
+        [Op.ne]: status
+      }
+    }
+
     const order = [
       ['id', 'DESC']
     ]

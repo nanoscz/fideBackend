@@ -3,14 +3,23 @@
 const Products = require('../models').products
 const { Op } = require("sequelize")
 
+/** 
+ * @status 0=disable, 1=enable, 2=all 
+ */
 class ProductsController {
   findAll(req, res, next) {
     const criteria = req.query.criteria;
+    const status = req.query.status;
 
     const order = [
       ['id', 'DESC']
     ]
-    const where = {}
+    const where = {
+      status: {
+        [Op.ne]: status
+      }
+    }
+
     if (criteria) {
       where[Op.or] = [
         {
@@ -35,7 +44,11 @@ class ProductsController {
   }
 
   findOne(req, res, next) {
-    Products.findOne({ where: { id: req.params.id } })
+    Products.findOne({
+      where: {
+        id: req.params.id
+      }
+    })
       .then(product => {
         if (!product) {
           res.status(404).json({
