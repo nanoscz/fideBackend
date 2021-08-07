@@ -4,9 +4,8 @@ const Sale = require('../models').sale
 const { Op } = require('sequelize')
 
 class SaleController {
-  findAll(req, res, next) {
-
-    const status = req.query.status;
+  findAll (req, res, next) {
+    const status = req.query.status
     const where = {
       status: {
         [Op.ne]: status
@@ -24,7 +23,7 @@ class SaleController {
       .catch(err => next(err))
   }
 
-  findOne(req, res, next) {
+  findOne (req, res, next) {
     Sale.findOne({ where: { id: req.params.id } })
       .then(sale => {
         if (!sale) {
@@ -40,7 +39,7 @@ class SaleController {
       .catch(err => next(err))
   }
 
-  findForDate(req, res, next) {
+  findForDate (req, res, next) {
     const { date, idSeller } = req.body
     const startDate = new Date(date)
     const endDate = new Date(startDate)
@@ -62,7 +61,7 @@ class SaleController {
       .catch(err => next(err))
   }
 
-  findByDate(req, res, next) {
+  findByDate (req, res, next) {
     const { date } = req.body
     const startDate = new Date(date)
     const endDate = new Date(startDate)
@@ -83,7 +82,7 @@ class SaleController {
       .catch(err => next(err))
   }
 
-  create(req, res, next) {
+  create (req, res, next) {
     const body = req.body
     const where = {}
     const order = [
@@ -92,7 +91,7 @@ class SaleController {
 
     Sale.findOne({ where, order })
       .then(lastSale => {
-        body.code = lastSale.dataValues.code + 1;
+        body.code = lastSale.dataValues.code + 1
         Sale.create(body)
           .then((sale) => {
             res.status(201).json(sale.dataValues).end()
@@ -102,7 +101,7 @@ class SaleController {
       .catch(err => next(err))
   }
 
-  update(req, res, next) {
+  update (req, res, next) {
     const body = req.body
     Sale.update(body, { where: { id: req.params.id } })
       .then((data) => {
@@ -119,7 +118,7 @@ class SaleController {
       .catch(err => next(err))
   }
 
-  delete(req, res, next) {
+  delete (req, res, next) {
     Sale.destroy({ where: { id: req.params.id } })
       .then(() => res.status(204).end())
       .catch(err => next(err))

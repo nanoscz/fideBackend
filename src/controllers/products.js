@@ -1,15 +1,15 @@
 'use strict'
 
 const Products = require('../models').products
-const { Op } = require("sequelize")
+const { Op } = require('sequelize')
 
-/** 
- * @status 0=disable, 1=enable, 2=all 
+/**
+ * @status 0=disable, 1=enable, 2=all
  */
 class ProductsController {
-  findAll(req, res, next) {
-    const criteria = req.query.criteria;
-    const status = req.query.status;
+  findAll (req, res, next) {
+    const criteria = req.query.criteria
+    const status = req.query.status
 
     const order = [
       ['id', 'DESC']
@@ -35,7 +35,6 @@ class ProductsController {
       ]
     }
 
-
     Products.findAll({ where, order })
       .then(products => {
         res.json(products)
@@ -43,7 +42,7 @@ class ProductsController {
       .catch(err => next(err))
   }
 
-  findOne(req, res, next) {
+  findOne (req, res, next) {
     Products.findOne({
       where: {
         id: req.params.id
@@ -63,7 +62,7 @@ class ProductsController {
       .catch(err => next(err))
   }
 
-  create(req, res, next) {
+  create (req, res, next) {
     const body = req.body
     Products.create(body)
       .then((product) => {
@@ -72,7 +71,7 @@ class ProductsController {
       .catch(err => next(err))
   }
 
-  update(req, res, next) {
+  update (req, res, next) {
     const body = req.body
     Products.update(body, { where: { id: req.params.id } })
       .then((data) => {
@@ -89,7 +88,7 @@ class ProductsController {
       .catch(err => next(err))
   }
 
-  delete(req, res, next) {
+  delete (req, res, next) {
     Products.destroy({ where: { id: req.params.id } })
       .then(() => res.status(204).end())
       .catch(err => next(err))

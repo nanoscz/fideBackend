@@ -12,15 +12,15 @@ module.exports = (sequelize, DataTypes) => {
       field: 'fecha'
     }
   },
-    {
-      defaultScope: {
-        attributes: {
-          exclude: []
-        }
-      },
-      tableName: 'categorias',
-      timestamps: false
-    }
+  {
+    defaultScope: {
+      attributes: {
+        exclude: []
+      }
+    },
+    tableName: 'categorias',
+    timestamps: false
+  }
   )
   category.associate = function (models) { }
   return category

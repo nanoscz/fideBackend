@@ -52,15 +52,15 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   },
-    {
-      defaultScope: {
-        attributes: {
-          exclude: []
-        }
-      },
-      tableName: 'productos',
-      timestamps: false
-    }
+  {
+    defaultScope: {
+      attributes: {
+        exclude: []
+      }
+    },
+    tableName: 'productos',
+    timestamps: false
+  }
   )
   products.associate = function (models) { }
   return products
