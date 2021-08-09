@@ -1,6 +1,7 @@
 'use strict'
 
 const { SaleController } = require('../controllers')
+const authorization = require('../middleware/autorization')
 
 const express = require('express')
 const router = express.Router()
@@ -8,7 +9,7 @@ const saleController = new SaleController()
 
 router
   .route('/')
-  .get(saleController.findAll)
+  .get(authorization, saleController.findAll)
   .post(saleController.create)
 
 router
@@ -19,7 +20,7 @@ router
 
 router
   .route('/date')
-  .post(saleController.findForDate)
+  .post(authorization, saleController.findForDate)
 
 router
   .route('/report/date')

@@ -1,6 +1,7 @@
 'use strict'
 
 const { SecurityController } = require('../controllers')
+const authorization = require('../middleware/autorization')
 
 const express = require('express')
 const router = express.Router()
@@ -13,6 +14,10 @@ router
 router
   .route('/register')
   .post(securityController.register)
+
+router
+  .route('/authorization')
+  .get(authorization, securityController.checkAuthorization)
 
 module.exports = {
   securityChildRouter: router

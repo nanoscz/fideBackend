@@ -10,7 +10,19 @@ const basename = path.basename(__filename)
 const databaseUrl = process.env.DATABASE_URL
 const db = {}
 const sequelize = new Sequelize(databaseUrl, {
-  dialect: 'mysql'
+  dialect: 'mysql',
+  charset: 'utf8',
+  collate: 'utf8_general_ci',
+  dialectOptions: {
+    dateStrings: true,
+    typeCast: function (field, next) { // for reading from database
+      if (field.type === 'DATETIME') {
+        return field.string()
+      }
+      return next()
+    }
+  },
+  timezone: '-04:00'
 })
 
 fs

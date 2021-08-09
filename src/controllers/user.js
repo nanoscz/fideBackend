@@ -19,7 +19,7 @@ class UserController {
   }
 
   findOne (req, res, next) {
-    User.findOne({ where: { id: req.params.id } })
+    User.findOne({ where: { id: req.user.id } })
       .then(user => {
         if (!user) {
           res.status(404).json({
@@ -30,7 +30,16 @@ class UserController {
           })
         }
         delete user.dataValues.password
-        res.json(user)
+        console.log('values', user.dataValues)
+        const { id, name, username, state, profile } = user.dataValues
+        const isAdmin = profile === 'Administrador'
+        res.json({
+          id,
+          name,
+          username,
+          state,
+          isAdmin
+        })
       })
       .catch(err => next(err))
   }

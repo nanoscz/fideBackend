@@ -42,9 +42,17 @@ module.exports = (sequelize, DataTypes) => {
       field: 'metodo_pago',
       allowNull: false
     },
-    createAt: {
+    date: {
       type: DataTypes.DATE,
       field: 'fecha'
+    },
+    createAt: {
+      type: DataTypes.DATE,
+      field: 'createAt'
+    },
+    updateAt: {
+      type: DataTypes.DATE,
+      field: 'updateAt'
     },
     status: {
       type: DataTypes.INTEGER,

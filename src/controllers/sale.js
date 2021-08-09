@@ -9,10 +9,17 @@ const { Op } = require('sequelize')
 class SaleController {
   findAll (req, res, next) {
     const status = req.query.status
+    const { id, isAdmin } = req.user
+
     const where = {
       status: {
         [Op.ne]: status
-      }
+      },
+      idSeller: id
+    }
+
+    if (isAdmin === true) {
+      delete where.idSeller
     }
 
     const order = [
@@ -44,16 +51,31 @@ class SaleController {
 
   findForDate (req, res, next) {
     const { date, idSeller } = req.body
+    const { id, isAdmin } = req.user
+
     const startDate = new Date(date)
     const endDate = new Date(startDate)
     endDate.setDate(endDate.getDate() + 1)
 
+    const status = 0 // registros habilitados
     const where = {
-      createAt: {
+      status: {
+        [Op.ne]: status
+      },
+      date: {
         [Op.between]: [startDate, endDate]
       },
-      idSeller: idSeller
+      idSeller: id
     }
+
+    if (isAdmin === true) {
+      if (idSeller === '' || idSeller === null) {
+        delete where.idSeller
+      } else {
+        where.idSeller = idSeller
+      }
+    }
+
     const order = [
       ['id', 'DESC']
     ]
@@ -87,6 +109,7 @@ class SaleController {
 
   create (req, res, next) {
     const body = req.body
+
     const where = {}
     const order = [
       ['id', 'DESC']

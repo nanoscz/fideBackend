@@ -1,4 +1,5 @@
 'use strict'
+const authorization = require('../middleware/autorization')
 
 const { UserController } = require('../controllers')
 
@@ -12,7 +13,7 @@ router
 
 router
   .route('/:id')
-  .get(userController.findOne)
+  .get(authorization, userController.findOne)
   .patch(userController.update)
   .delete(userController.delete)
 

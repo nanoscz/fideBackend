@@ -6,6 +6,7 @@ const ProductsController = require('./products')
 const ClientController = require('./client')
 const CategoryController = require('./category')
 const SecurityController = require('./security')
+const SideMenuController = require('./sidemenu')
 
 module.exports = {
   UserController,
@@ -13,5 +14,6 @@ module.exports = {
   ProductsController,
   ClientController,
   CategoryController,
-  SecurityController
+  SecurityController,
+  SideMenuController
 }
