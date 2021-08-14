@@ -42,6 +42,10 @@ module.exports = (sequelize, DataTypes) => {
       field: 'metodo_pago',
       allowNull: false
     },
+    description: {
+      type: DataTypes.TEXT,
+      defaultValue: null
+    },
     date: {
       type: DataTypes.DATE,
       field: 'fecha'
@@ -60,15 +64,15 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   },
-  {
-    defaultScope: {
-      attributes: {
-        exclude: []
-      }
-    },
-    tableName: 'ventas',
-    timestamps: false
-  }
+    {
+      defaultScope: {
+        attributes: {
+          exclude: []
+        }
+      },
+      tableName: 'ventas',
+      timestamps: false
+    }
   )
   sale.associate = function (models) {
 

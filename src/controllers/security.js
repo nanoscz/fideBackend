@@ -4,11 +4,11 @@ const jwt = require('jsonwebtoken')
 const saltRounds = 10
 
 class SecurityController {
-  checkAuthorization (req, res, next) {
+  checkAuthorization(req, res, next) {
     res.send(req.user.isAdmin)
   }
 
-  login (req, res, next) {
+  login(req, res, next) {
     const error = {
       name: 'Authentication Error.',
       message: 'The username or password is incorrect.'
@@ -49,7 +49,7 @@ class SecurityController {
       .catch(err => next(err))
   }
 
-  register (req, res, next) {
+  register(req, res, next) {
     const body = req.body
     const salt = bcrypt.genSaltSync(saltRounds)
     const password = bcrypt.hashSync(body.password, salt)
